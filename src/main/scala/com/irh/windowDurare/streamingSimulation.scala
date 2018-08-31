@@ -1,27 +1,31 @@
 package com.irh.windowDurare
 
-import java.io.{PrintWriter}
+import java.io.PrintWriter
 import java.net.ServerSocket
+
 import scala.io.Source
 
+/**
+  * https://blog.csdn.net/legotime/article/details/51836040
+  */
 
 object streamingSimulation {
   def index(n: Int) = scala.util.Random.nextInt(n)
 
   def main(args: Array[String]) {
     // 调用该模拟器需要三个参数，分为为文件路径、端口号和间隔时间（单位：毫秒）
-    if (args.length != 3) {
-      System.err.println("Usage: <filename> <port> <millisecond>")
-      System.exit(1)
-    }
+    //    if (args.length != 3) {
+    //      System.err.println("Usage: <filename> <port> <millisecond>")
+    //      System.exit(1)
+    //    }
 
     // 获取指定文件总的行数
-    val filename = args(0)
+    val filename = "D:\\dev_data\\idea\\spark_test\\input\\res\\Information"
     val lines = Source.fromFile(filename).getLines.toList
     val filerow = lines.length
 
     // 指定监听某端口，当外部程序请求时建立连接
-    val listener = new ServerSocket(args(1).toInt)
+    val listener = new ServerSocket(9999)
 
     while (true) {
       val socket = listener.accept()
@@ -30,7 +34,7 @@ object streamingSimulation {
           println("Got client connected from: " + socket.getInetAddress)
           val out = new PrintWriter(socket.getOutputStream(), true)
           while (true) {
-            Thread.sleep(args(2).toLong)
+            Thread.sleep(1000)
             // 当该端口接受请求时，随机获取某行数据发送给对方
             val content = lines(index(filerow))
             println("-------------------------------------------")
