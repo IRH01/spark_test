@@ -23,7 +23,7 @@ object reduceByWindow {
     ssc.checkpoint("/Res")
 
     //get the socket Streaming data
-    val socketStreaming = ssc.socketTextStream("master", 9999)
+    val socketStreaming = ssc.socketTextStream("localhost", 9999)
 
     //val data = socketStreaming.reduceByWindow(_+_,Seconds(6),Seconds(2))
     val data = socketStreaming.reduceByWindow(_ + _, _ + _, Seconds(6), Seconds(2))

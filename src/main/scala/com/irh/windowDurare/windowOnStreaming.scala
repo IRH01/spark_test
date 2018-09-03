@@ -21,7 +21,7 @@ object  windowOnStreaming {
     ssc.checkpoint("/Res")
 
     //get the socket Streaming data
-    val socketStreaming = ssc.socketTextStream("master",9999)
+    val socketStreaming = ssc.socketTextStream("localhost",9999)
 
     val data = socketStreaming.map(x =>(x,1))
     //def window(windowDuration: Duration): DStream[T]
