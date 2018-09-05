@@ -1,8 +1,8 @@
-package com.irh
+package com.irh.sparkSql
 
 import java.text.SimpleDateFormat
 
-import org.apache.spark.sql.types._
+import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.{Row, SparkSession}
 
 import scala.collection.mutable
